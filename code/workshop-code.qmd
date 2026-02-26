@@ -240,6 +240,25 @@ Insert code to display the summary for the best model.
 
 
 
+**What are the reference levels?**  
+
+
+
+**What does the `(Intercept)` represent?**  
+
+
+
+**What does `water_treatmentWell watered` represent?**
+
+
+
+**What does `species_namePenstemon centranthifolius` represent?**  
+
+
+
+**What does `species_nameEschscholzia californica` represent?**
+
+
 
 
 ## Stop and think: what does this model mean?  
