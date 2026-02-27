@@ -11,6 +11,8 @@ execute:
   warning: false # use this to make sure warnings don't show upl
 ---
 
+[deployed html url](https://hambanana0923.github.io/workshop-08_winter-2026/code/workshop-code.html)
+
 In this workshop, we will answer the question: How do specific leaf area, water treatment, and species influence plant mass?  
 
 **Specific leaf area** is a continuous variable measured in cm^2^/g.  
@@ -157,6 +159,21 @@ Label the axes with units where appropriate.
 Add a title describing the relationship (e.g. as SLA increases, total mass ______). 
 
 
+```{r}
+#| label: jitter SLA v total mass
+
+ggplot(
+  data = drought_exp_clean,
+  aes(x = sla,
+      y = total_g
+  )) +
+    geom_point(color = "#50a492") +
+    labs(
+      x = "Specific Leaf Area (cm\U00B2/g)",
+      y = "Total Mass (g)",
+      title = "as SLA increase, total mass increases"
+    ) 
+```
 
 
 
@@ -170,6 +187,25 @@ Add a title describing the differences in (mean or median) plant mass between wa
 
 
 
+```{r}
+#| label: plant mass v water treatments
+
+ggplot(
+  data = drought_exp_clean,
+  aes(x = water_treatment,
+      y = total_g,
+      color = water_treatment)) +
+  geom_jitter(height = 0,
+              width = 0.3) +
+  labs(
+    x = "Water Treatment",
+    y = "Total Mass (g)",
+    title = "Mean Well Watered mass is greater than Mean Drought Stressed Mass"
+  ) +
+  theme(legend.position = "none",
+         plot.title = element_text(size = 10))
+
+```
 
 
 
@@ -185,6 +221,29 @@ Add a title describing the differences in (mean or median) plant mass between sp
 Bonus: order the x-axis by decreasing mean plant mass _and_ wrap the long species names using the `label_wrap()` function from the `scales` package.
 
 
+```{r}
+#| label: mass v species
+
+ggplot(data = drought_exp_clean,
+       aes(x = species_name,
+           y = total_g,
+           color = species_name)) +
+  geom_jitter(height = 0,
+              width = 0.2) +
+  labs(x = "Species",
+       y = "Total Mass (g)",
+       title = "Mean Plant Mass Differs between Species") +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c(
+    "Lotus scorparius" = lotsco_col,
+    "Eschscholzia californica" = esccal_col, # California poppy
+    "Penstemon centranthifolius" = pencen_col,# Scarlet bugler
+    "Grindelia camporum" = gricam_col,# Gumweed
+    "Salvia leucophylla" = salleu_col, # purple sage
+    "Stipa pulchra" = stipul_col # purple needlegrass
+  )) + 
+  scale_x_discrete(labels = label_wrap(10)) 
+```
 
 
 
